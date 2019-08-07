@@ -1,0 +1,15 @@
+.loginBox{
+    margin-top: 20%;
+    padding: 2rem;
+}
+
+.leftContent{
+    background-color: #f0f4f7;
+    box-shadow: 4px 0px 9px 0px #eee;
+}
+.bottom-text {
+    background: #f0f4f7;
+    /* box-shadow: 4px 0px 9px 0px #eee; */
+    padding: 10px 20px;
+    color: #344248;
+}
