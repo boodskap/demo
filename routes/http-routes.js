@@ -11,20 +11,6 @@ var app = express();
 var fs = require('fs');
 var _ = require('underscore');
 // var $ = require('jquery');
-var request = require("request");
-// require('run-middleware')(app);
-
-var server = require('http').Server(app);
-var io = require('socket.io')(server);
-
-
-
-io.on('connection', function(socket){
-    // socket.on('chat message', function(msg){
-      io.emit('simulator', "hello form server side.");
-      setInterval( function(){io.emit('simulator',"hello form server side...");}, 5000);
-    // });
-});
 
 Routes.prototype.init = function () {
 

@@ -120,9 +120,7 @@ function startSimulator() {
             // swal("Success", "simulator Running ", "success");
             $(".status").html(`<div> <span style="color:aquamarine">  `+SIM_ID+` Simulator running...  </span> </div>` );
             // $(".console-area").append(`<div> <span> > `+moment().format("YYYY-MM-DD HH:mm:ss")+` --> </span> <span> `+res.simid+` simulating `+JSON.stringify(res.data)+`  </span> </div>` );
-            
-            
-           
+   
             console.log("success: "+JSON.stringify(res));
         },
         error: function (e) {
@@ -146,10 +144,10 @@ function startSimulator() {
     }
     
 }
+
 function clearConsole() {
     $(".console-area").html('');
 }
-
 
 function stopSimulator() {
 
@@ -171,13 +169,12 @@ function stopSimulator() {
              console.log("success: "+res);
 
              if(res == 'error'){
-                $(".console-area").append(`<div> <span style="color:red">  SIM-PMs Simulator stopping error... Try again...  </span> </div>` ); 
-                $('#stopSim').html('stop');
+                $(".status").html(` <span style="color:red">  `+SIM_ID+` Simulator stopping error... Try again...  </span> ` );
+                $(".console-area").append(`<div> <span style="color:red"> > ` +moment().format("YYYY-MM-DD HH:mm:ss")+ ` -> `+SIM_ID+` Simulator stopping error... Try again...  </span> </div>` ); 
+                $('#stopSim').html('Stop');
                 return;
              }
-            
-            $('#stopSim').attr("disabled",true);
-           
+                     
             $('#runSim').removeClass('disabled');
             $('#runSim').attr('disabled',false);
             $('#runSim').html('Run');

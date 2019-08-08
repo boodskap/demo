@@ -9,10 +9,7 @@
                 <div class="card-header">
                     <span class="float-left" style="font-size:1.2em; margin-right:10px;margin-top:5px"> Room Maintenance
                     </span>
-                    <!-- <a title="Settings"
-                                href="javascript:void(0)"> <img class="float-right" src="images/settings.png"
-                                    height="25px" alt=""></a> -->
-
+                  
                     <ul class="nav nav-pills" id="pmsTab" role="tablist">
                         <li class="nav-item">
                             <a class="nav-link active" id="ui-pms-tab" data-toggle="tab" href="#ui-pms" onclick=""
@@ -56,91 +53,36 @@
                                 <div class="col-md-3">
                                     <div style="background: #f2f6fd;padding:5px">
                                         <ul class="file-tree">
-                                            <li>
-                                                <!-- <a href="#">Views</a> -->
                                             <li> <a href="#">Views</a>
                                                 <ul>
                                                     <!-- <li> <a href="#" onclick="codeView('html')">pms.html</a> </li> -->
                                                     <li> <a href="#" onclick="codeView('js')">rms.js</a> </li>
-                                                    <!-- <li> <a href="#link7">views3</a> </li> -->
-                                                    <!-- <li> <a href="#link8">Link 8</a> </li> -->
-                                                    <!-- <li> <a href="#">Deeper</a>
-                                                                    <ul>
-                                                                    <li><a href="#">Link 1</a> </li>
-                                                                    <li><a href="#">Link 2</a> </li>
-                                                                    <li><a href="#">Link 3</a> </li>
-                                                                    <li><a href="#">Link 4</a> </li>
-                                                                    </ul>
-                                                                </li> -->
+                                       
                                                 </ul>
                                             </li>
-                                            <!-- <li><a href="#">Webapps</a>
-                                                            <ul>
-                                                                 <li> <a href="#link5">Link 5</a> </li>
-                                                                <li> <a href="#link6">Link 6</a> </li>
-                                                                <li> <a href="#link7">Link 7</a> </li> 
-                                                                <li> <a href="#">css</a>
-                                                                    <ul>
-                                                                            <li> <a href="#">style.css</a> </li>
-                                                                           
-                                                                            <a class="nav-link" id="code-pms-tab" data-toggle="tab" href="#code-pms" role="tab" aria-controls="code-pms" aria-selected="false">Code</a>
-                                                                          </ul> </li>
-                                                                <li> <a href="#">js</a>
-                                                                <ul>
-                                                                    <li> <a href="#">script.js</a> </li>
-                                                                   
-                                                                </ul>
-                                                                </li>
-                                                            </ul>
-                                                        </li> -->
-                                        </ul>
-                                        </li>
-
                                         </ul>
                                     </div>
-
-                                    <table class="linksholder">
-                                    </table>
-
+                                    <table class="linksholder"> </table>
                                 </div>
                                 <div class="col-md-9">
                                     <div style="border: 2px solid #f7f7f7;border-left:none;position: relative;"
-                                        id="editor"> </div>
-
-
-                                   
-
-                                    <br>
-                                    <button onclick="savetoServer()" class="btn btn-sm float-right btn-outline-primary">
-                                        Save</button>
-
+                                        id="editor"> 
+                                    </div> <br>
+                                    <button onclick="savetoServer()" class="btn btn-sm float-right btn-outline-primary"> Save </button>
                                 </div>
                             </div>
-
-
-
                         </div>
                         <div class="tab-pane fade " id="sim-pms" role="tabpanel" aria-labelledby="sim-pms-tab">
                             <!-- Device Simulator  -->
                             <div class="row">
                                 <div class=" col-md-4">
-                                    <!-- <div style="border: 1px solid #d9d9d9; background: #f7f7f7;"> <h6 style="">PMS Simulator </h6>  </div> -->
                                     <div class=" col-sim card">
                                         <div class="card-header ">
                                             <div class="row">
-                                                <div style="margin-top:5px;font-size:1.1em" class="col-md-5">Room
-                                                    Maintenance Simulator</div>
-                                                <!-- <div class="col-md-8"> -->
-                                                <!-- <div class="float-right"> -->
-                                                <input id="dev-id" type="text" placeholder="DEVICE-ID"
-                                                    class="input-sm  col-md-3 form-control ">
-                                                <input id="dev-model" placeholder="DEVICE-MODEL"
-                                                    style="margin-left:5px;" type="text"
-                                                    class="input-sm col-md-3 form-control">
-
-                                                <!-- </div> -->
-
-                                                <!-- </div> -->
+                                                <div style="margin-top:5px;font-size:1.1em" class="col-md-5">Room Maintenance Simulator</div>
+                                            
+                                                <input id="dev-id" type="text" placeholder="DEVICE-ID" class="input-sm  col-md-3 form-control ">
+                                                <input id="dev-model" placeholder="DEVICE-MODEL" style="margin-left:5px;" type="text"    class="input-sm col-md-3 form-control">
 
                                             </div>
                                         </div>
@@ -172,63 +114,29 @@
                                                                     <input type="radio" name="light" id="lightOff" autocomplete="off" >Light OFF
                                                                 </label>
 
-                                                            </div>
-                                                            
-                                                                  <br><br>
-                                                                        <select style="margin-left:35%" class="form-control col-md-4 " id="sim">
-                                                                            <option value="0"> Only once </option>
-                                                                            <option value="15000">Every 15sec</option>
-                                                                            <option value="45000">Every 45sec</option>
-                                                                            <option value="60000">Every 1min</option>
-                                                                            <option value="180000">Every 3min</option>
-                                                                            <option value="300000">Every 5min</option>
-                
-                                                                        </select>
-                                                                    <br>
-                                                                    <button id="runSim" class="btn btn-primary col-md-5" type="button" 
-                                                                        onclick="startSimulator()"> Run </button>
-                                                                    <button style="margin-left:10px " id="stopSim" 
-                                                                        type="button" class="disabled btn btn-secondary col-md-5"
-                                                                        onclick="stopSimulator()">
-                                                                        Stop </button>
-                
-                                                               
-
+                                                            </div><br><br>
+                                   
+                                                            <select style="margin-left:35%" class="form-control col-md-4 " id="sim">
+                                                                <option value="0"> Only once </option>
+                                                                <option value="15000">Every 15sec</option>
+                                                                <option value="45000">Every 45sec</option>
+                                                                <option value="60000">Every 1min</option>
+                                                                <option value="180000">Every 3min</option>
+                                                                <option value="300000">Every 5min</option>
+    
+                                                            </select>
+                                                            <br>
+                                                            <button id="runSim" class="btn btn-primary col-md-5" type="button" onclick="startSimulator()"> Run </button>
+                                                            <button  id="stopSim" disabled=true class="disabled btn btn-secondary col-md-5" type="button" style="margin-left:10px"  onclick="stopSimulator()"> Stop </button>
+                    
                                                         </div>
 
-
-
-
-                                                        <!-- <div style="text-align: center">
-                                                                       <span> Auto Mode</span>
-                                                                        <label class="radio-inline"> 
-                                                                            <input type="radio" name="automode" checked> ON
-                                                                        </label>
-                                                                        <label class="radio-inline">
-                                                                            <input type="radio" name="automode"> OFF
-                                                                        </label> 
-
-                                                                        <span> Light Control</span>
-                                                                        <label class="radio-inline"> 
-                                                                            <input type="radio" name="lightcontrol" checked> ON
-                                                                        </label>
-                                                                        <label class="radio-inline">
-                                                                            <input type="radio" name="lightcontrol"> OFF
-                                                                        </label>
-                                                                    </div> -->
-
-
                                                     </div>
-
-
-                                                </div>
-                                               
+                                                </div>                                       
 
                                             </form>
                                         </div>
                                     </div>
-
-
 
                                 </div>
                                 <div class=" col-md-8">
@@ -270,11 +178,16 @@
 
 <script src="/socket.io/socket.io.js"></script>
 <script>
-    $(".status").html(`<div> <span style = "color:red" > SIM-RMS Simulator checking status...please wait...  </span> </div>` );
-
+ 
   var socket = io();
+  socket.on('rms', function (sts) {
+        console.log(sts);
+        $(".status").html("SIM-RMS " + sts);
+        $("#runSim").addClass('disabled'); $('#runSim').attr('disabled', true);
+        $("#stopSim").removeClass('disabled'); $('#stopSim').attr('disabled', false);
+    });
   socket.on('SIM-RMS', function(msg){
-    $(".status").html(`<div> <span> `+msg.simid+` Simulator running...  </span> </div>` );
+        $(".status").html(`<div> <span> `+msg.simid+` Simulator running...  </span> </div>` );
 
         if(msg.type ==1){
             $(".status").html(`<div> <span> `+msg.simid+` one time simulation...  </span> </div>` );

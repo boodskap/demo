@@ -97,6 +97,7 @@ function startSimulator() {
 
     $('#runSim').addClass("disabled");
     $('#runSim').attr('disabled',true);
+
     $('#runSim').html('<span>Running...<i class="fa fa-spinner fa-spin"></i></span>');
 
     var data ={
@@ -149,6 +150,7 @@ function startSimulator() {
 
         $('#runSim').removeClass("disabled");
         $('#runSim').attr('disabled',false);
+
         $('#runSim').html('<span> Run </span>');
 
     }
@@ -162,8 +164,10 @@ function clearConsole() {
 function stopSimulator() {
 
     $(".status").html('<span style="color:red"> '+SIM_ID+' Simulator stoped...</span>');
+
     $('#stopSim').addClass('disabled');
     $('#stopSim').attr("disabled",true);
+
     $("#stopSim").html("Stopping...");
   //  $('#stopSim').attr("disabled","disabled");
    // $('#runSim').removeAttr('disabled');
@@ -179,19 +183,19 @@ function stopSimulator() {
              console.log("success: "+res);
 
              if(res == 'error'){
-                $(".console-area").append(`<div> <span style="color:red">  SIM-PMs Simulator stopping error... Try again...  </span> </div>` ); 
-                $('#stopSim').html('stop');
+                $(".status").html(` <span style="color:red">  `+SIM_ID+` Simulator stopping error... Try again...  </span> ` );
+                $(".console-area").append(`<div> <span style="color:red"> > ` +moment().format("YYYY-MM-DD HH:mm:ss")+ ` -> `+SIM_ID+` Simulator stopping error... Try again...  </span> </div>` ); 
+                $('#stopSim').html('Stop');
                 return;
              }
-            
-            $('#stopSim').attr("disabled",true);
-           
+                       
             $('#runSim').removeClass('disabled');
             $('#runSim').attr('disabled',false);
+
             $('#runSim').html('Run');
 
             $(".status").html(`<div> <span style="color:red"> `+res+` Simulator stopped...  </span> </div>` );
-            $(".console-area").append(`<div> <span style="color:red"> >` +moment().format("YYYY-MM-DD HH:mm:ss")+` -> `+res+` Simulator stopped...  </span> </div>` );
+            $(".console-area").append(`<div> <span style="color:red"> > ` +moment().format("YYYY-MM-DD HH:mm:ss")+` -> `+res+` Simulator stopped...  </span> </div>` );
             $("#stopSim").html("Stop");
 
           //  $(".console-area").append(`<div> <span> > `+moment().format("YYYY-MM-DD HH:mm:ss")+` --> </span> <span> `+res.simid+` simulating `+res.data+`  </span> </div>` );

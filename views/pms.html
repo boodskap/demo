@@ -2,308 +2,262 @@
 
 <div class="container-fluid">
     <div class="row">
-      
-        <div class="col-md-12" >
 
-                <div class="card ">
-                        <div class="card-header">
-                            <span class="float-left" style="font-size:1.2em; margin-right:10px;margin-top:5px"> Power Management </span>
-                             <!-- <a title="Settings"
-                                href="javascript:void(0)"> <img class="float-right" src="images/settings.png"
-                                    height="25px" alt=""></a> -->
-                            
-                            <ul class="nav nav-pills" id="pmsTab" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link active" id="ui-pms-tab" data-toggle="tab" href="#ui-pms" onclick="" role="tab"
-                                        aria-controls="ui-pms" aria-selected="true">UI</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link " id="code-pms-tab" data-toggle="tab" href="#code-pms" onclick="" role="tab"
-                                        aria-controls="code-pms" aria-selected="false">Code</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="sim-pms-tab" data-toggle="tab" href="#sim-pms" onclick="simView()" role="tab"
-                                        aria-controls="sim-pms" aria-selected="false">Simulator</a>
-                                </li>
-                            </ul>
-                            
+        <div class="col-md-12">
+
+            <div class="card ">
+                <div class="card-header">
+                    <span class="float-left" style="font-size:1.2em; margin-right:10px;margin-top:5px"> Power Management
+                    </span>
+
+                    <ul class="nav nav-pills" id="pmsTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="ui-pms-tab" data-toggle="tab" href="#ui-pms" onclick=""
+                                role="tab" aria-controls="ui-pms" aria-selected="true">UI</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " id="code-pms-tab" data-toggle="tab" href="#code-pms" onclick=""
+                                role="tab" aria-controls="code-pms" aria-selected="false">Code</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="sim-pms-tab" data-toggle="tab" href="#sim-pms" onclick="simView()"
+                                role="tab" aria-controls="sim-pms" aria-selected="false">Simulator</a>
+                        </li>
+                    </ul>
+
+                </div>
+                <div class="card-body">
+
+                    <div class="tab-content" id="subTabContent">
+                        <div class="tab-pane fade show active " id="ui-pms" role="tabpanel"
+                            aria-labelledby="ui-pms-tab">
+                            <select style="border-radius:0px;height:30px;margin-right:10px;font-size:1em"
+                                class="form-control float-left input-sm col-sm-2" name="" id="views"
+                                onchange="uiView()">
+
+                                <option value="view4">View 4</option>
+                                <option value="view3">View 3</option>
+                                <option value="view2">View 2</option>
+                                <option value="view1">View 1</option>
+                            </select>
+                            <select style="border-radius:0px;height:30px;margin-right:10px;font-size:1em"
+                                class="form-control  input-sm col-sm-2" name="" id="devices" onchange="uiView()">
+                                code <option value="bskp001">BSKP001</option>
+                                <option value="bskp002">BSKP002</option>
+                            </select>
+                            <div id="deviceDetails" style="height: 400px;overflow-y:auto"></div>
                         </div>
-                        <div class="card-body">
+                        <div class="tab-pane fade  " id="code-pms" role="tabpanel" aria-labelledby="code-pms-tab">
+                            code pms tab
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div style="background: #f2f6fd;padding:5px">
+                                        <ul class="file-tree">
 
-                        <div class="tab-content" id="subTabContent">
-                            <div class="tab-pane fade show active " id="ui-pms" role="tabpanel" aria-labelledby="ui-pms-tab">
-                                    <select style="border-radius:0px;height:30px;margin-right:10px;font-size:1em"
-                                    class="form-control float-left input-sm col-sm-2" name="" id="views"
-                                    onchange="uiView()">
-    
-                                    <option value="view4">View 4</option>
-                                    <option value="view3">View 3</option>
-                                    <option value="view2">View 2</option>
-                                    <option value="view1">View 1</option>
-                                </select>
-                                <select style="border-radius:0px;height:30px;margin-right:10px;font-size:1em"
-                                    class="form-control  input-sm col-sm-2" name="" id="devices"
-                                    onchange="uiView()">
-                                    code      <option value="bskp001">BSKP001</option>
-                                    <option value="bskp002">BSKP002</option>
-                                </select>    
-                                <div id="deviceDetails" style="height: 400px;overflow-y:auto"></div>
-                            </div>
-                            <div class="tab-pane fade  " id="code-pms" role="tabpanel" aria-labelledby="code-pms-tab">
-                                code pms tab
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <div style="background: #f2f6fd;padding:5px" >
-                                            <ul class="file-tree">
-                                                <li>
-                                                    <!-- <a href="#">Views</a> -->
-                                                        <li> <a href="#" >Views</a> 
-                                                            <ul>
-                                                                <!-- <li> <a href="#" onclick="codeView('html')">pms.html</a> </li> -->
-                                                                <li> <a href="#" onclick="codeView('js')">pms.js</a> </li>
-                                                                <!-- <li> <a href="#link7">views3</a> </li> -->
-                                                                <!-- <li> <a href="#link8">Link 8</a> </li> -->
-                                                                <!-- <li> <a href="#">Deeper</a>
-                                                                    <ul>
-                                                                    <li><a href="#">Link 1</a> </li>
-                                                                    <li><a href="#">Link 2</a> </li>
-                                                                    <li><a href="#">Link 3</a> </li>
-                                                                    <li><a href="#">Link 4</a> </li>
-                                                                    </ul>
-                                                                </li> -->
-                                                            </ul>
-                                                        </li>
-                                                        <!-- <li><a href="#">Webapps</a>
-                                                            <ul>
-                                                                 <li> <a href="#link5">Link 5</a> </li>
-                                                                <li> <a href="#link6">Link 6</a> </li>
-                                                                <li> <a href="#link7">Link 7</a> </li> 
-                                                                <li> <a href="#">css</a>
-                                                                    <ul>
-                                                                            <li> <a href="#">style.css</a> </li>
-                                                                           
-                                                                            <a class="nav-link" id="code-pms-tab" data-toggle="tab" href="#code-pms" role="tab" aria-controls="code-pms" aria-selected="false">Code</a>
-                                                                          </ul> </li>
-                                                                <li> <a href="#">js</a>
-                                                                <ul>
-                                                                    <li> <a href="#">script.js</a> </li>
-                                                                   
-                                                                </ul>
-                                                                </li>
-                                                            </ul>
-                                                        </li> -->
-                                                        </ul>
-                                                    </li>
-                                                  
-                                            </ul>
-                                        </div>   
-                                        
-                                        <table class="linksholder">
-                                        </table>
-                                        
+                                            <li> <a href="#">Views</a>
+                                                <ul>
+                                                    <li> <a href="#" onclick="codeView('js')">pms.js</a> </li>
+
+                                                </ul>
+                                            </li>
+
+                                        </ul>
                                     </div>
-                                    <div class="col-md-9">
-                                        <div style="border: 2px solid #f7f7f7;border-left:none;position: relative;" id="editor"> </div>
 
+                                    <table class="linksholder">
+                                    </table>
 
-<div style="display: none"><textarea id="js" name="js" cols="30" rows="10">
-  
-</textarea>
-<textarea id="html" name="html" cols="30" rows="10">
-    
-</textarea>
-</div>
-
-                                        <br>
-                                        <button onclick="savetoServer()" class="btn btn-sm float-right btn-outline-primary"> Save</button>
-                                        
-                                    </div>
                                 </div>
+                                <div class="col-md-9">
+                                    <div style="border: 2px solid #f7f7f7;border-left:none;position: relative;"
+                                        id="editor"> </div>
 
+                                    <div style="display: none">
+                                        <textarea id="js" name="js" cols="30" rows="10">
 
+                                        </textarea>
+                                        <textarea id="html" name="html" cols="30" rows="10">
 
+                                        </textarea>
+                                    </div>
+
+                                    <br>
+                                    <button onclick="savetoServer()" class="btn btn-sm float-right btn-outline-primary">
+                                        Save</button>
+
+                                </div>
                             </div>
-                            <div class="tab-pane fade " id="sim-pms" role="tabpanel" aria-labelledby="sim-pms-tab">
-                                <!-- Device Simulator  -->
-                                <div class="row">
-                                    <div class=" col-md-6">
-                                        <!-- <div style="border: 1px solid #d9d9d9; background: #f7f7f7;"> <h6 style="">PMS Simulator </h6>  </div> -->
-                                        <div class=" col-sim card">
-                                            <div class="card-header ">
-                                                <div class="row">
-                                                        <div style="margin-top:5px;font-size:1.2em" class="col-sm-4">Power Management Simulator</div>  
-                                                        <!-- <div class="col-sm-8"> -->
-                                                            <!-- <div class="float-right"> -->
-                                                                <input id="dev-id" type="text" placeholder="DEVICE-ID" class="input-sm col-sm-2 form-control "> 
-                                                                <input id="dev-model" placeholder="DEVICE-MODEL" style="margin-left:5px;" type="text" class="input-sm col-sm-2 form-control">
-                
-                                                            <!-- </div> -->
-                                                           
-                                                        <!-- </div> -->
-                                                       
-                                                </div>
-                                            </div>
-                                            <div class="card-body">
-                                                    <form  style="margin: 15px">
 
-                                                        <!-- <table>
-                                                            <tr>
-                                                                <td colspan="3"> Voltage </td>
-                                                                <td colspan="3"> Wattage </td>
+                        </div>
+                        <div class="tab-pane fade " id="sim-pms" role="tabpanel" aria-labelledby="sim-pms-tab">
+                            <!-- Device Simulator  -->
+                            <div class="row">
+                                <div class=" col-md-6">
+                                    <div class=" col-sim card">
+                                        <div class="card-header ">
+                                            <div class="row">
+                                                <div style="margin-top:5px;font-size:1.2em" class="col-sm-4">Power
+                                                    Management Simulator</div>
+                                                <input id="dev-id" type="text" placeholder="DEVICE-ID"
+                                                    class="input-sm col-sm-2 form-control ">
+                                                <input id="dev-model" placeholder="DEVICE-MODEL"
+                                                    style="margin-left:5px;" type="text"
+                                                    class="input-sm col-sm-2 form-control">
 
-                                                            </tr>
-                                                            <tr> 
-                                                                <td> Phase1 </td> 
-                                                                <td> <input class="form-control" type="number"></td>
-                                                                <td> <input class="form-control" type="number"></td>
-                                                                <td> <input class="form-control" type="number"></td>
-                                                                <td> <input class="form-control" type="number"></td>
-
-                                                            </tr>
-                                                        </table> -->
-
-
-
-                                                            <div class="form-group row">
-                                                                <div class="col-sm-3">
-
-                                                                </div>
-                                                                <div class="col-sm-3">
-                                                                    <span> Voltage </span>
-                                                                </div>
-
-                                                                <div class="col-sm-1">
-
-                                                                </div>
-                                                                <div class="col-sm-2">
-                                                                    <span> Wattage </span>
-                                                                </div>
-                                                                
-                                                            </div>
-                                                            <div class="form-group row">
-                                                                <span for="p1v" class="col-sm-2 col-form-label"> Phase1  </span>
-                                                                <div class="col-sm-2">
-                                                                    <input type="number" min="10" step="0.01" max="160" placeholder="Min" class="form-control" id="p1vMin"> </div>
-                                                                <div class="col-sm-2">
-                                                                    <input type="number" min="10" step="0.01" max="160" placeholder="Max" class="form-control" id="p1vMax">
-
-                                                                </div>
-                                                                <!-- <span for="p1w" class="col-sm-2 col-form-label"> Phase1 Wattage </span> -->
-                                                                <div class="col-sm-2">
-                                                                    <input type="number" min="1" step="0.01" placeholder="Min" class="form-control" id="p1wMin">
-                                                                </div>
-                                                                <div class="col-sm-2">
-                                                                    <input type="number" min="1" step="0.01" placeholder="Max" class="form-control" id="p1wMax">
-                                                                </div>
-                                                                
-                                                            </div>
-                                                            <div class="form-group row">
-                                                                <span for="p1v" class="col-sm-2 col-form-label"> Phase2  </span>
-                                                                <div class="col-sm-2">
-                                                                    <input type="number" min="10" step="0.01" max="160" placeholder="Min" class="form-control" id="p2vMin"> </div>
-                                                                <div class="col-sm-2">
-                                                                    <input type="number" min="10" step="0.01" max="160" placeholder="Max" class="form-control" id="p2vMax">
-
-                                                                </div>
-                                                                <!-- <span for="p1w" class="col-sm-2 col-form-label"> Phase2 Wattage </span> -->
-                                                                <div class="col-sm-2">
-                                                                    <input type="number" min="1" step="0.01" placeholder="Min" class="form-control" id="p2wMin">
-                                                                </div>
-                                                                <div class="col-sm-2">
-                                                                    <input type="number" min="1" step="0.01" placeholder="Max" class="form-control" id="p2wMax">
-                                                                </div>
-                                                                
-                                                            </div>
-                                                            <div class="form-group row">
-                                                                <span for="p1v" class="col-sm-2 col-form-label"> Phase3  </span>
-                                                                <div class="col-sm-2">
-                                                                    <input type="number" min="10" step="0.01" max="160" placeholder="Min" class="form-control" id="p3vMin"> 
-                                                                </div>
-                                                                <div class="col-sm-2">
-                                                                    <input type="number" min="10" step="0.01" max="160" placeholder="Max" class="form-control" id="p3vMax">
-
-                                                                </div>
-                                                                <!-- <span for="p1w" class="col-sm-2 col-form-label"> Phase3 Wattage </span> -->
-                                                                <div class="col-sm-2">
-                                                                    <input type="number" min="1" step="0.01" placeholder="Min" class="form-control" id="p3wMin">
-                                                                </div>
-                                                                <div class="col-sm-2">
-                                                                    <input type="number" min="1" step="0.01" placeholder="Max" class="form-control" id="p3wMax">
-                                                                </div>
-                                                                
-                                                            </div>
-            
-                                                            <!-- <div class="form-group row">
-                                                               
-                                                                <span for="p2w" class="col-sm-2 col-form-label"> Phase2 Wattage </span>
-                                                                <div class="col-sm-2">
-                                                                    <input type="number" min="1" step="0.01" class="form-control" id="p2v">
-                                                                </div>
-                                                                <span for="p3w" class="col-sm-2 col-form-label"> Phase3 Wattage </span>
-                                                                <div class="col-sm-2">
-                                                                    <input type="number" min="1" step="0.01" class="form-control" id="p3v">
-                                                                </div>
-                                                            </div> -->
-                                                        
-                                                            <div class="form-group row">
-                                                                <span style="font-weight: 600;" for="sim" class="col-sm-2 col-form-label"> Simulate </span>
-                                                                <div class="col-sm-3">
-                                                                    <select class="form-control" id="sim" >
-                                                                        <option value="0"> Only once </option> 
-                                                                        <option value="15000">Every 15sec</option>
-                                                                        <option value="45000">Every 45sec</option>
-                                                                        <option value="60000">Every 1min</option>
-                                                                        <option value="180000">Every 3min</option>
-                                                                        <option value="300000">Every 5min</option>
-            
-                                                                    </select>
-                                                                </div>
-                                                                <!-- <span> -->
-                                                                    <button id = "runSim" type="button" onclick="startSimulator()" class="btn btn-primary col-sm-3"  > Run </button>  
-                                                                    <button id = "stopSim" type="button"  onclick="stopSimulator()" class=" disabled btn btn-secondary col-sm-3" style="margin-left:10px;" > 
-                                                                        Stop  </button>          
-                                                                <!-- </span> -->
-            
-                                                            </div>
-                                                        
-                                                        </form>
                                             </div>
                                         </div>
-                                        
-                                        
-                                        
-                                    </div>
-                                    <div class=" col-md-6">
-                                        <div class="col-run" style="background: black;color:#c9f2fe; border: 2px solid #d9d9d9; min-height:260px;overflow:auto">
-                                            <div style="margin: 15px">
-                                                    <div style="color: aquamarine" class="status"></div>
+                                        <div class="card-body">
+                                            <form style="margin: 15px">
 
-                                                <div class="console-area">
-                                                    <!-- <div> <span> 15/07/19 12:56:12 </span> <span> Simulating data for PMS </span> </div> --> 
+                                                <div class="form-group row">
+                                                    <div class="col-sm-3">
+
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <span> Voltage </span>
+                                                    </div>
+
+                                                    <div class="col-sm-1">
+
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <span> Wattage </span>
+                                                    </div>
+
                                                 </div>
-                                               
-                                            </div>  
-                                        </div> <div style="position:relative;margin-top:-35px;float:right;margin-right:10px;background:gray"> <button class="btn btn-sm btn-outline-dark" onclick="clearConsole()"> <i class="fas fa-trash-alt"></i></button></div>
+                                                <div class="form-group row">
+                                                    <span for="p1v" class="col-sm-2 col-form-label"> Phase1 </span>
+                                                    <div class="col-sm-2">
+                                                        <input type="number" min="10" step="0.01" max="160"
+                                                            placeholder="Min" class="form-control" id="p1vMin"> </div>
+                                                    <div class="col-sm-2">
+                                                        <input type="number" min="10" step="0.01" max="160"
+                                                            placeholder="Max" class="form-control" id="p1vMax">
+
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <input type="number" min="1" step="0.01" placeholder="Min"
+                                                            class="form-control" id="p1wMin">
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <input type="number" min="1" step="0.01" placeholder="Max"
+                                                            class="form-control" id="p1wMax">
+                                                    </div>
+
+                                                </div>
+                                                <div class="form-group row">
+                                                    <span for="p1v" class="col-sm-2 col-form-label"> Phase2 </span>
+                                                    <div class="col-sm-2">
+                                                        <input type="number" min="10" step="0.01" max="160"
+                                                            placeholder="Min" class="form-control" id="p2vMin"> </div>
+                                                    <div class="col-sm-2">
+                                                        <input type="number" min="10" step="0.01" max="160"
+                                                            placeholder="Max" class="form-control" id="p2vMax">
+
+                                                    </div>
+
+                                                    <div class="col-sm-2">
+                                                        <input type="number" min="1" step="0.01" placeholder="Min"
+                                                            class="form-control" id="p2wMin">
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <input type="number" min="1" step="0.01" placeholder="Max"
+                                                            class="form-control" id="p2wMax">
+                                                    </div>
+
+                                                </div>
+                                                <div class="form-group row">
+                                                    <span for="p1v" class="col-sm-2 col-form-label"> Phase3 </span>
+                                                    <div class="col-sm-2">
+                                                        <input type="number" min="10" step="0.01" max="160"
+                                                            placeholder="Min" class="form-control" id="p3vMin">
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <input type="number" min="10" step="0.01" max="160"
+                                                            placeholder="Max" class="form-control" id="p3vMax">
+
+                                                    </div>
+
+                                                    <div class="col-sm-2">
+                                                        <input type="number" min="1" step="0.01" placeholder="Min"
+                                                            class="form-control" id="p3wMin">
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <input type="number" min="1" step="0.01" placeholder="Max"
+                                                            class="form-control" id="p3wMax">
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    <span style="font-weight: 600;" for="sim"
+                                                        class="col-sm-2 col-form-label"> Simulate </span>
+                                                    <div class="col-sm-3">
+                                                        <select class="form-control" id="sim">
+                                                            <option value="0"> Only once </option>
+                                                            <option value="15000">Every 15sec</option>
+                                                            <option value="45000">Every 45sec</option>
+                                                            <option value="60000">Every 1min</option>
+                                                            <option value="180000">Every 3min</option>
+                                                            <option value="300000">Every 5min</option>
+
+                                                        </select>
+                                                    </div>
+                                                    <!-- <span> -->
+                                                    <button id="runSim" type="button" onclick="startSimulator()"
+                                                        class="btn btn-primary col-sm-3"> Run </button>
+                                                    <button id="stopSim" disabled=true type="button"
+                                                        onclick="stopSimulator()"
+                                                        class=" disabled btn btn-secondary col-sm-3"
+                                                        style="margin-left:10px;">
+                                                        Stop </button>
+                                                    <!-- </span> -->
+
+                                                </div>
+
+                                            </form>
+                                        </div>
                                     </div>
+
+
+
                                 </div>
-                                
+                                <div class=" col-md-6">
+                                    <div class="col-run"
+                                        style="background: black;color:#c9f2fe; border: 2px solid #d9d9d9; min-height:260px;overflow:auto">
+                                        <div style="margin: 15px">
+                                            <div style="color: aquamarine" class="status"></div>
 
+                                            <div class="console-area">
+                                                <!-- <div> <span> 15/07/19 12:56:12 </span> <span> Simulating data for PMS </span> </div> -->
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div
+                                        style="position:relative;margin-top:-35px;float:right;margin-right:10px;background:gray">
+                                        <button class="btn btn-sm btn-outline-dark" onclick="clearConsole()"> <i
+                                                class="fas fa-trash-alt"></i></button></div>
+                                </div>
                             </div>
-                        </div>
-                       
-                    </div>
-                </div>
 
-           
-            
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+
 
 
         </div>
-    </div> 
+    </div>
 
 
-   <br><br><br>
-   
+    <br><br><br>
+
 
 </div>
 
@@ -324,32 +278,36 @@
 
 <script src="/socket.io/socket.io.js"></script>
 <script>
-    $(".status").html(`<div> <span style = "color:red" > SIM-PMS Simulator checking status...please wait...  </span> </div>` );
+    var socket = io();
+    socket.on('pms', function (sts) {
+        console.log(sts);
+        $(".status").html("SIM-PMS " + sts);
+        $("#runSim").addClass('disabled'); $('#runSim').attr('disabled', true);
+        $("#stopSim").removeClass('disabled'); $('#stopSim').attr('disabled', false);
+    });
+    socket.on('SIM-PMS', function (msg) {
+        console.log('inner check', socket.connected);
 
-  var socket = io();
-  //console.log('SIM-PMS', socket.connected);
-  socket.on('SIM-PMS', function(msg){
-    //$('#messages').append($('<li>').text(msg));
-           // console.log('SIM-PMS', socket.connected);
+       
         console.log(msg);
-        $(".status").html(`<div> <span> `+msg.simid+` Simulator running...  </span> </div>` );
-       if(msg.type ==1){
-            $(".status").html(`<div> <span> `+msg.simid+` one time simulation...  </span> </div>` );
-            $(".console-area").html(`<div> <span> > `+moment().format("YYYY-MM-DD HH:mm:ss")+`  </span> <span> `+msg.simid+` simulated `+JSON.stringify(msg.data)+`  </span> </div>` );
+        $(".status").html(`<div> <span> ` + msg.simid + ` Simulator running...  </span> </div>`);
+        if (msg.type == 1) {
+            $(".status").html(`<div> <span> ` + msg.simid + ` one time simulation...  </span> </div>`);
+            $(".console-area").html(`<div> <span> > ` + moment().format("YYYY-MM-DD HH:mm:ss") + `  </span> <span> ` + msg.simid + ` simulated ` + JSON.stringify(msg.data) + `  </span> </div>`);
             return;
         }
 
-        $('#runSim').addClass("disabled");             
-        $('#runSim').attr('disabled',true);
+        $('#runSim').addClass("disabled");
+        $('#runSim').attr('disabled', true);
         $('#runSim').html('<span> <i class="fa fa-spinner fa-spin"></i> Running...</span>');
         $('#stopSim').removeClass('disabled');
-        $('#stopSim').attr('disabled',false);
-        
-       
+        $('#stopSim').attr('disabled', false);
 
-        $(".console-area").append(`<div> <span> > `+moment().format("YYYY-MM-DD HH:mm:ss")+` </span> -> <span> `+msg.simid+` simulating `+JSON.stringify(msg.data)+`  </span> </div>` );
+
+
+        $(".console-area").append(`<div> <span> > ` + moment().format("YYYY-MM-DD HH:mm:ss") + ` </span> -> <span> ` + msg.simid + ` simulating ` + JSON.stringify(msg.data) + `  </span> </div>`);
 
     });
-    $(".status").html(`<div> <span style = "color:red" > SIM-PMS Simulator not running...  </span> </div>` );
- 
+    $(".status").html(`<div> <span style = "color:red" > SIM-PMS Simulator not running...  </span> </div>`);
+
 </script>
