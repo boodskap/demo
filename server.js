@@ -8,39 +8,19 @@ var path = require("path");
 var fs = require('fs');
 var request = require("request");
 var _ = require('underscore');
-var CircularJSON = require('circular-json');
-var safeJsonStringify = require('safe-json-stringify');
 
-var stringify = require('json-stringify-safe');
-
-
-
-var PMS_UID;
-var RMS_UID;
-
+var PMS_UID,RMS_UID ;
 
 var app = express();
-var cookieParser = require('cookie-parser')
+var cookieParser = require('cookie-parser');
 var session = require('cookie-session');
-var compression = require('compression')
+var compression = require('compression');
 
 // app.use('fs', fs);
 /*******************************
  * Require Configuration
  ****************************/
 var conf = require("./config");
-// fs.open('myfile', 'r', (err, fd) => {
-//     if (err) {
-//       if (err.code === 'ENOENT') {
-//         console.error('myfile does not exist');
-//         return;
-//       }
-  
-//       throw err;
-//     }
-  
-//     readMyData(fd);
-//   });
 
 app.use(bodyParser.urlencoded({
     extended: true
@@ -68,9 +48,6 @@ var controllerOptions = {
         res.set('x-timestamp', Date.now());
     }
 };
-var test = function(){
-    console.log('server function testing...');
-}
 
 
 app.use('/css', express.static(__dirname + '/webapps/css', options));
@@ -98,7 +75,15 @@ var server = require('http').Server(app);
 var io = require('socket.io')(server);
 
 io.on('connection', function(socket){
+    if(PMS_UID) io.emit('pms','simulator running...');
+    if(RMS_UID) io.emit('rms', 'simulator running...');
 
+    // console.log('socket connection: ', io.sockets.connected);
+    // if(! io.sockets.connected) {
+    //     throw new Error('socket connection error...');
+    // }else{
+    //     io.emit('status','simulator not running...');
+    // }
 app.post('/runsimulator/:simid', function (req, res) {
 
     var content = req.body.data;
@@ -109,114 +94,15 @@ app.post('/runsimulator/:simid', function (req, res) {
     console.log(new Date()+'-> sending simulate data from main... '+url);
     res.send('simulator starting...');
 
-    // if(content.tl>0){
-    //     if (simid == 'SIM-PMS'){
-            
-            
-    //         PMS_UID = setInterval(() => {
-
-    //             data = {
-    //                 p1v: _.random(parseInt(content.p1vMin) ,parseInt(content.p1vMax)),
-    //                 p2v: _.random(parseInt(content.p2vMin),parseInt(content.p2vMax)),
-    //                 p3v: _.random(parseInt(content.p3vMin) ,parseInt(content.p3vMax)),
-        
-    //                 p1w: _.random(parseInt(content.p1wMin),parseInt(content.p1wMax)),
-    //                 p2w: _.random(parseInt(content.p2wMin),parseInt(content.p2wMax)),
-    //                 p3w: _.random(parseInt(content.p3wMin),parseInt(content.p3wMax)) 
-    //             };
-    //             var sending = {simid: simid,"data":data,"type":1};
-    //             request({
-    //                 url: url                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ,
-    //                 method: 'POST',
-    //                 contentType:"application/x-www-form-urlencoded",
-    //                 body:JSON.stringify(data)
-                                
-    //             },  function (error,response,body) {
-    //                 if(!error) {
-                    
-    //                     // console.log("i did it");
-    //                     // console.log(body);  
-    //                     io.emit(simid, sending);
-    //                     // res.send(JSON.stringify(sending));
-    //                 }
-    //             });
-    //         }, content.tl);
-    //     }else if(simid == 'SIM-RMS') {
-
-          
-    //        RMS_UID = setInterval(() => {
-    //             data = {
-    //                 // automode:content.autoMode,
-    //                 // light: content.light, 
-    //                 automode:parseInt(_.random(0,1)),
-    //                 light:parseInt(_.random(0,1))
-    //             };
-    //             var sending = {simid: simid,"data":data, "type":1};
-    //             request({
-    //                 url: url                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ,
-    //                 method: 'POST',
-    //                 contentType:"application/x-www-form-urlencoded",
-    //                 body:JSON.stringify(data)
-                                
-    //             },  function (error,response,body) {
-    //                 if(!error) {
-                    
-    //                     // console.log("i did it");
-    //                     // console.log(body);  
-    //                     io.emit(simid, sending);
-    //                     // res.send(JSON.stringify(sending));
-    //                 }
-    //             });
-    //         }, content.tl);
-    //     }
-    // }else{
-
-    //     if (simid == 'SIM-PMS'){
-    //         data = {
-    //             p1v: _.random(parseInt(content.p1vMin) ,parseInt(content.p1vMax)),
-    //             p2v: _.random(parseInt(content.p2vMin),parseInt(content.p2vMax)),
-    //             p3v: _.random(parseInt(content.p3vMin) ,parseInt(content.p3vMax)),
-    
-    //             p1w: _.random(parseInt(content.p1wMin),parseInt(content.p1wMax)),
-    //             p2w: _.random(parseInt(content.p2wMin),parseInt(content.p2wMax)),
-    //             p3w: _.random(parseInt(content.p3wMin),parseInt(content.p3wMax)) 
-    //         };
-    //     }else if(simid == 'SIM-RMS'){
-    //         data = {
-    //             // automode:content.autoMode,
-    //             // light: content.light, 
-    //             automode:parseInt(_.random(0,1)),
-    //             light:parseInt(_.random(0,1))
-    //         };
-    //     }
-    //     var sending = {simid: simid,"data":data,"type":0};
-    //     request({
-    //         url: url                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ,
-    //         method: 'POST',
-    //         contentType:"application/x-www-form-urlencoded",
-    //         body:JSON.stringify(data)
-                        
-    //     },  function (error,response,body) {
-    //         if(!error) {
-            
-    //             // console.log("i did it");
-    //             // console.log(body);  
-    //             io.emit(simid, sending);
-    //             // res.send(JSON.stringify(sending));
-    //         }
-    //     });
-    // }
-    
-
-
     if(content.tl > 0) {
         // io.emit('simulator', sending);
-        
-       var INTER_ID = setInterval(function x(){
+     
+        var INTER_ID = setInterval(function x(){
             // console.log(simid);
             if(simid == 'SIM-PMS') {
                
-                console.log(PMS_UID);
+                // console.log(PMS_UID);
+              
                 data = {
                     p1v: _.random(parseInt(content.p1vMin) ,parseInt(content.p1vMax)),
                     p2v: _.random(parseInt(content.p2vMin),parseInt(content.p2vMax)),
@@ -239,9 +125,8 @@ app.post('/runsimulator/:simid', function (req, res) {
                 console.log('Undefined Simulator...');
             }
             var sending = {simid: simid,"data":data};
-
-            console.log(new Date()+'-> sending '+simid+'simulate data from main... '+url);
-            // var sending = {simid: INTER_ID,"data":data};
+            io.emit(simid, sending);
+            console.log(new Date()+'-> sending '+simid+' simulate data from main... '+url);
             request({
                 url: url,
                 method: 'POST',
@@ -296,7 +181,9 @@ app.post('/runsimulator/:simid', function (req, res) {
     }
    
 }); 
-
+if(! io.sockets.connected) {
+    throw new Error('socket connection error...');
+}
 app.post("/stopsimulator/:simid", function(req,res){
     var simid = req.params["simid"];
     console.log(simid);
@@ -308,7 +195,8 @@ app.post("/stopsimulator/:simid", function(req,res){
             return;
         }
         clearInterval(PMS_UID);
-        console.log(PMS_UID);
+        PMS_UID ='';
+        // console.log(PMS_UID);
         res.send(simid);
     }else if(simid == 'SIM-RMS'){
         console.log(simid+' stopping');
@@ -317,8 +205,9 @@ app.post("/stopsimulator/:simid", function(req,res){
             console.log('error');
             return;
         }
-        console.log(RMS_UID);
+        // console.log(RMS_UID);
         clearInterval(RMS_UID);
+        RMS_UID = '';
         res.send(simid);
     }else {
         console.log('undefined simulator...');
@@ -328,29 +217,6 @@ app.post("/stopsimulator/:simid", function(req,res){
 });
 
 });
-
-
-
-// io.on('disconnect', function(){
-//     console.log('user disconnected');
-//     app.post("/stopsimulator/:simid", function(req,res){
-//         var simid = req.params["simid"];
-//         console.log(simid);
-//         clearInterval(simid);
-//     });
-
-// });
-
-
-// io.on('connection', function(socket){
-//     // socket.on('chat message', function(msg){
-//       io.emit('simulator', "hello form server.");
-//       setInterval( function(){io.emit('simulator',"hello form server..."+Date.now());}, 5000);
-//     // });
-// });
-
-
-
  
 app.conf = conf;
 
@@ -367,5 +233,4 @@ server.listen(conf['port']);
 //Initializing the web routes
 var Routes = require('./routes/http-routes');
 new Routes(app);
-
 
