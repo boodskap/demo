@@ -9,7 +9,7 @@ var fs = require('fs');
 var request = require("request");
 var _ = require('underscore');
 
-var PMS_UID,RMS_UID ;
+var PMS_UID,RMS_UID,FM_UID,TH_UID ;
 
 var app = express();
 var cookieParser = require('cookie-parser');
@@ -77,6 +77,9 @@ var io = require('socket.io')(server);
 io.on('connection', function(socket){
     if(PMS_UID) io.emit('pms','simulator running...');
     if(RMS_UID) io.emit('rms', 'simulator running...');
+    if(FM_UID) io.emit('fm', 'simulator running...');
+    if(TH_UID) io.emit('th', 'simulator running...');
+
 
     // console.log('socket connection: ', io.sockets.connected);
     // if(! io.sockets.connected) {
@@ -97,12 +100,10 @@ app.post('/runsimulator/:simid', function (req, res) {
     if(content.tl > 0) {
         // io.emit('simulator', sending);
      
-        var INTER_ID = setInterval(function x(){
+        var INTER_ID = setInterval(function imRun(){
             // console.log(simid);
             if(simid == 'SIM-PMS') {
-               
                 // console.log(PMS_UID);
-              
                 data = {
                     p1v: _.random(parseInt(content.p1vMin) ,parseInt(content.p1vMax)),
                     p2v: _.random(parseInt(content.p2vMin),parseInt(content.p2vMax)),
@@ -114,25 +115,36 @@ app.post('/runsimulator/:simid', function (req, res) {
                 };
                 PMS_UID = INTER_ID;
             }else if(simid == 'SIM-RMS'){
-                
                 // console.log(RMS_UID);
                 data = {
                     automode:parseInt(_.random(0,1)),
                     light:parseInt(_.random(0,1))
                 };
                 RMS_UID = INTER_ID;
+            }else if(simid == 'SIM-FM'){
+                data = {
+                    pulse:_.random(parseFloat(content.fmMin),parseFloat(content.fmMax))
+                };
+                FM_UID = INTER_ID;
+            }else if( simid == 'SIM-TH'){ 
+                data = {
+                    tinc: _.random(parseFloat(content.tincMin) ,parseFloat(content.tincMax)),
+                    tinf: _.random(parseFloat(content.tinfMin) ,parseFloat(content.tinfMax)),
+                    hum: _.random(parseFloat(content.humMin) ,parseFloat(content.humMax))
+                };
+                TH_UID = INTER_ID;
             }else {
                 console.log('Undefined Simulator...');
             }
             var sending = {simid: simid,"data":data};
-            io.emit(simid, sending);
+            // io.emit(simid, sending);
             console.log(new Date()+'-> sending '+simid+' simulate data from main... '+url);
             request({
                 url: url,
                 method: 'POST',
                 contentType:"application/x-www-form-urlencoded",
                 body: JSON.stringify(data)
-                            
+                // data:JSON.stringify(data)
             },function (error,response,body) {
                 if(!error){   
                     io.emit(simid, sending);
@@ -140,8 +152,8 @@ app.post('/runsimulator/:simid', function (req, res) {
                     throw error;
                 }
             });  
-            return x;
-        } (),content.tl); 
+            return imRun;
+        }(),content.tl); 
     }else {
         console.log("one time simulation...");
         if(simid == 'SIM-PMS') {
@@ -154,12 +166,24 @@ app.post('/runsimulator/:simid', function (req, res) {
                 p2w: _.random(parseInt(content.p2wMin),parseInt(content.p2wMax)),
                 p3w: _.random(parseInt(content.p3wMin),parseInt(content.p3wMax)) 
             };
-    
+
         }else if(simid == 'SIM-RMS'){
             data = {
                 automode:content.autoMode,
                 light:content.light
             };
+        }else if(simid == 'SIM-FM'){
+            data = {
+                pulse:_.random(content.fmMin,content.fmMax)
+            };
+          
+        }else if( simid == 'SIM-TH'){ 
+            data = {
+                tinc: _.random(content.tincMin,content.tincMax),
+                tinf: _.random(content.tinfMin,content.tinfMax),
+                hum: _.random(content.humMin,content.humMax)
+            };
+          
         }else {
             console.log('Undefined Simulator...');
         }
@@ -208,6 +232,28 @@ app.post("/stopsimulator/:simid", function(req,res){
         // console.log(RMS_UID);
         clearInterval(RMS_UID);
         RMS_UID = '';
+        res.send(simid);
+    }else if(simid == 'SIM-FM'){
+        console.log(simid+' stopping');
+        if(FM_UID == undefined){
+            res.send('error');
+            console.log('error');
+            return;
+        }
+        // console.log(FM_UID);
+        clearInterval(FM_UID);
+        FM_UID = '';
+        res.send(simid);
+    }else if(simid == 'SIM-TH'){
+        console.log(simid+' stopping');
+        if(TH_UID == undefined){
+            res.send('error');
+            console.log('error');
+            return;
+        }
+        // console.log(TH_UID);
+        clearInterval(TH_UID);
+        TH_UID = '';
         res.send(simid);
     }else {
         console.log('undefined simulator...');
