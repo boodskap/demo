@@ -1,0 +1,199 @@
+<br>
+
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="col-md-12">
+
+            <div class="card ">
+                <div class="card-header">
+                    <span class="float-left" style="font-size:1.2em; margin-right:10px;margin-top:5px">Flow Meter
+                    </span>
+                  
+                    <ul class="nav nav-pills" id="pmsTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="ui-pms-tab" data-toggle="tab" href="#ui-pms" onclick=""
+                                role="tab" aria-controls="ui-pms" aria-selected="true">UI</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " id="code-pms-tab" data-toggle="tab" href="#code-pms" onclick=""
+                                role="tab" aria-controls="code-pms" aria-selected="false">Code</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="sim-pms-tab" data-toggle="tab" href="#sim-pms" onclick="simView()"
+                                role="tab" aria-controls="sim-pms" aria-selected="false">Simulator</a>
+                        </li>
+                    </ul>
+
+                </div>
+                <div class="card-body">
+
+                    <div class="tab-content" id="subTabContent">
+                        <div class="tab-pane fade show active " id="ui-pms" role="tabpanel"
+                            aria-labelledby="ui-pms-tab">
+                            <select style="border-radius:0px;height:30px;margin-right:10px;font-size:1em"
+                                class="form-control float-left input-sm col-sm-2" name="" id="views"
+                                onchange="uiView()">
+
+                                <option value="view4">View 4</option>
+                                <option value="view3">View 3</option>
+                                <option value="view2">View 2</option>
+                                <option value="view1">View 1</option>
+                            </select>
+                            <select style="border-radius:0px;height:30px;margin-right:10px;font-size:1em"
+                                class="form-control  input-sm col-sm-2" name="" id="devices" onchange="uiView()">
+                                code <option value="bskp001">BSKP001</option>
+                                <option value="bskp002">BSKP002</option>
+                            </select>
+                            <div id="deviceDetails" style="height: 400px;overflow-y:auto"></div>
+                        </div>
+                        <div class="tab-pane fade  " id="code-pms" role="tabpanel" aria-labelledby="code-pms-tab">
+                            code rms tab
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div style="background: #f2f6fd;padding:5px">
+                                        <ul class="file-tree">
+                                            <li> <a href="#">Views</a>
+                                                <ul>
+                                                    <!-- <li> <a href="#" onclick="codeView('html')">pms.html</a> </li> -->
+                                                    <li> <a href="#" onclick="codeView('js')">fm.js</a> </li>
+                                       
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <table class="linksholder"> </table>
+                                </div>
+                                <div class="col-md-9">
+                                    <div style="border: 2px solid #f7f7f7;border-left:none;position: relative;"
+                                        id="editor"> 
+                                    </div> <br>
+                                    <button onclick="savetoServer()" class="btn btn-sm float-right btn-outline-primary"> Save </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade " id="sim-pms" role="tabpanel" aria-labelledby="sim-pms-tab">
+                            <!-- Device Simulator  -->
+                            <div class="row">
+                                <div class=" col-md-4">
+                                    <div class=" col-sim card">
+                                        <div class="card-header ">
+                                            <div class="row">
+                                                <div style="margin-top:8px;font-size:1.1em" class="col-md-5">Flow Meter Simulator</div>
+                                            
+                                                <input id="dev-id" type="text" placeholder="DEVICE-ID" class="input-sm  col-md-3 form-control ">
+                                                <input id="dev-model" placeholder="DEVICE-MODEL" style="margin-left:5px;" type="text"    class="input-sm col-md-3 form-control">
+
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <form style="margin: 15px">
+                                                <div style="text-align:center">
+
+                                                    <div class="form-group row">
+                                                        <span style="font-size: 13px" class="col-md-4 col-form-label"> Flow Meter Pulse </span>
+                                                        <div class="col-sm-4">
+                                                            <input type="number" min="1" step="1" max="500"
+                                                                placeholder="Min" class="form-control" id="fmMin">
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <input type="number" min="1" step="1" max="500"
+                                                                placeholder="Max" class="form-control" id="fmMax">
+    
+                                                        </div>
+                                                    </div> 
+                                                    <div class="form-group row">
+                                                      
+                                                        <span style="font-size: 13px;margin-top:5px" class="col-sm-4 col-form-label"> Simulator </span>  
+                                                        <select style="" class="form-control col-sm-4 " id="sim">
+                                                            <option value="0"> Only once </option>
+                                                            <option value="15000">Every 15sec</option>
+                                                            <option value="45000">Every 45sec</option>
+                                                            <option value="60000">Every 1min</option>
+                                                            <option value="180000">Every 3min</option>
+                                                            <option value="300000">Every 5min</option>
+
+                                                        </select>
+                
+                                                    </div>
+                                                    <div class="form-group row">
+
+                                                        <button id="runSim" class="btn btn-primary col-md-5" type="button" onclick="startSimulator()"> Run </button>
+                                                        <button  id="stopSim" disabled=true class="disabled btn btn-secondary col-md-5" type="button" style="margin-left:10px"  onclick="stopSimulator()"> Stop </button>
+                                                    </div>
+                                                 </div>
+                                            </form>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class=" col-md-8">
+                                    
+                                    <div class="col-run"
+                                        style="background: black;color:#c9f2fe; border: 2px solid #d9d9d9; min-height:260px;overflow:auto">
+                                        <div style="margin: 15px">
+                                                <div style="color: aquamarine" class="status"></div>
+                                            <div class="console-area">
+                                                <!-- <div> <span> 15/07/19 12:56:12 </span> <span> Simulating data for PMS </span> </div> -->
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    
+                                    <div
+                                        style="position:relative;margin-top:-35px;float:right;margin-right:10px;background:gray">
+                                        <button class="btn btn-sm btn-outline-dark" onclick="clearConsole()"> <i
+                                                class="fas fa-trash-alt"></i></button></div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <br><br><br>
+
+</div>
+
+<script src="/js/fm.js"></script>
+<script src="/js/fm-ui.js"></script>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+ 
+  var socket = io();
+  socket.on('fm', function (sts) {
+        console.log(sts);
+        $(".status").html("SIM-FM " + sts);
+        $("#runSim").addClass('disabled'); $('#runSim').attr('disabled', true);
+        $("#stopSim").removeClass('disabled'); $('#stopSim').attr('disabled', false);
+    });
+  socket.on('SIM-FM', function(msg){
+        $(".status").html(`<div> <span> `+msg.simid+` Simulator running...  </span> </div>` );
+
+        if(msg.type ==1){
+            $(".status").html(`<div> <span> `+msg.simid+` one time simulation...  </span> </div>` );
+
+            $(".console-area").html(`<div> <span> > `+moment().format("YYYY-MM-DD HH:mm:ss")+`  </span> <span> `+msg.simid+` simulated `+JSON.stringify(msg.data)+`  </span> </div>` );
+            return;
+        }
+        //console.log(msg);
+        $('#runSim').addClass("disabled");             
+        $('#runSim').attr('disabled',true);
+        $('#runSim').html('<span> <i class="fa fa-spinner fa-spin"></i> Running...</span>');
+        $('#stopSim').removeClass('disabled');
+        $('#stopSim').attr('disabled',false);
+
+        $(".console-area").append(`<div> <span> > `+moment().format("YYYY-MM-DD HH:mm:ss")+`  </span> <span> `+msg.simid+` simulating `+JSON.stringify(msg.data)+`  </span> </div>` );
+
+    });
+    $(".status").html(`<div> <span style = "color:red" > SIM-FM Simulator not running...  </span> </div>` );
+
+  
+</script>
