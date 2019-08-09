@@ -10,7 +10,6 @@ var app = express();
 
 var fs = require('fs');
 var _ = require('underscore');
-// var $ = require('jquery');
 
 Routes.prototype.init = function () {
 
@@ -63,6 +62,12 @@ Routes.prototype.init = function () {
     });
     self.app.get('/rms', sessionCheck, function (req, res) {
         res.render('rms.html', {layout: ''});
+    });
+    self.app.get('/fm', sessionCheck, function (req, res) {
+        res.render('fm.html', {layout: ''});
+    });
+    self.app.get('/th', sessionCheck, function (req, res) {
+        res.render('th.html', {layout: ''});
     });
 
     self.app.get('/readfile/:filename', function(req,res){
